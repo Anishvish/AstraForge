@@ -59,15 +59,30 @@ export function MonacoEditor() {
 
       if (editorRef.current && response.content) {
         const selection = editorRef.current.getSelection();
-        const range = new monaco.Range(
-          selection.startLineNumber,
-          selection.startColumn,
-          selection.endLineNumber,
-          selection.endColumn
-        );
-        const id = { major: 1, minor: 1 };
-        const op = { identifier: id, range: range, text: response.content, forceMoveMarkers: true };
-        editorRef.current.executeEdits("my-source", [op]);
+        // Extract clean code from possible markdown code block wraps
+        let cleanedContent = response.content;
+        if (cleanedContent.includes("```")) {
+          const match = cleanedContent.match(/```(?:\w+)?\n([\s\S]*?)\n```/);
+          if (match && match[1]) {
+            cleanedContent = match[1];
+          }
+        }
+        
+        const inst = monaco || (window as any).monaco;
+        if (inst) {
+          const range = new inst.Range(
+            selection.startLineNumber,
+            selection.startColumn,
+            selection.endLineNumber,
+            selection.endColumn
+          );
+          const id = { major: 1, minor: 1 };
+          const op = { identifier: id, range: range, text: cleanedContent, forceMoveMarkers: true };
+          editorRef.current.executeEdits("astraforge-ai-refactor", [op]);
+        } else {
+          // Fallback if monaco instance isn't saved in state
+          editorRef.current.trigger("keyboard", "type", { text: cleanedContent });
+        }
       }
     } catch (err) {
       console.error(err);
@@ -110,15 +125,31 @@ export function MonacoEditor() {
       setCursorPosition(e.position.lineNumber, e.position.column);
     });
 
-    // Add keybinding for inline AI prompt Ctrl+Shift+I
-    editor.addCommand(monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyMod.Shift | monacoInstance.KeyCode.KeyI, () => {
+    // Add keybinding for inline AI prompt Ctrl+Shift+I and Ctrl+I
+    const triggerPrompt = () => {
       const selection = editor.getSelection();
-      const text = editor.getModel().getValueInRange(selection);
-      if (text) {
-        setSelectedText(text);
-        setShowPrompt(true);
+      let text = editor.getModel().getValueInRange(selection);
+      if (!text) {
+        // Fallback: take the entire line
+        const position = editor.getPosition();
+        if (position) {
+          const lineContent = editor.getModel().getLineContent(position.lineNumber);
+          text = lineContent;
+          // select the line so replacement works properly
+          editor.setSelection({
+            startLineNumber: position.lineNumber,
+            startColumn: 1,
+            endLineNumber: position.lineNumber,
+            endColumn: lineContent.length + 1
+          });
+        }
       }
-    });
+      setSelectedText(text || "");
+      setShowPrompt(true);
+    };
+
+    editor.addCommand(monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyMod.Shift | monacoInstance.KeyCode.KeyI, triggerPrompt);
+    editor.addCommand(monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyCode.KeyI, triggerPrompt);
   };
 
   return (
