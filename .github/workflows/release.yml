@@ -2,8 +2,12 @@ name: Release AstraForge
 
 on:
   push:
+    branches:
+      - master
     tags:
       - 'v*'
+  workflow_dispatch:
+
 
 permissions:
   contents: write
@@ -39,8 +43,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tauriScript: npx tauri
-          tagName: ${{ github.ref_name }}
-          releaseName: 'AstraForge ${{ github.ref_name }}'
+          tagName: ${{ github.ref_type == 'tag' && github.ref_name || format('v0.1.1-{0}', github.sha) }}
+          releaseName: 'AstraForge ${{ github.ref_type == 'tag' && github.ref_name || 'Development Build' }}'
           releaseBody: |
             ## AstraForge ${{ github.ref_name }}
             
@@ -52,3 +56,4 @@ jobs:
             See [CHANGELOG.md](CHANGELOG.md) for details.
           releaseDraft: true
           prerelease: false
+
