@@ -5,10 +5,10 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+
+    "composite": true,
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -16,3 +16,4 @@
   },
   "include": ["vite.config.ts"]
 }
+

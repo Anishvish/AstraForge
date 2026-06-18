@@ -10,6 +10,8 @@ import { ModelPanel } from "../models/ModelPanel";
 import { SearchPanel } from "../search/SearchPanel";
 import { ReviewPanel } from "../review/ReviewPanel";
 import { McpPanel } from "../mcp/McpPanel";
+import { SettingsPanel } from "../settings/SettingsPanel";
+
 
 export function PanelContainer() {
   const showSidebar = useUIStore((s) => s.showSidebar);
