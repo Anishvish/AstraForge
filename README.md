@@ -108,8 +108,8 @@ AstraForge is not a chatbot. AstraForge is not a code generator. **AstraForge is
 
 ```bash
 # Clone the repository
-git clone https://github.com/astraforge/astraforge.git
-cd astraforge
+git clone https://github.com/Anishvish/AstraForge.git
+cd AstraForge
 
 # Install frontend dependencies
 npm install
