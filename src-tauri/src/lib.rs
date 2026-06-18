@@ -10,6 +10,7 @@ pub mod memory;
 pub mod checkpoint;
 pub mod settings;
 pub mod rag;
+pub mod healing;
 
 use std::path::PathBuf;
 use tauri::{App, Manager};
@@ -111,8 +112,12 @@ pub fn run() {
             crate::settings::commands::get_all_settings,
 
             // RAG Semantic Search
-            crate::rag::commands::semantic_search
+            crate::rag::commands::semantic_search,
+
+            // Self-Healing
+            crate::healing::commands::run_self_healing_build
         ])
+
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

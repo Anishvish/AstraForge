@@ -399,6 +399,21 @@ export async function semanticSearch(
   return invoke<RAGSearchResult[]>('semantic_search', { query, limit: limit ?? 5 });
 }
 
+export interface HealingResult {
+  success: boolean;
+  original_error: string;
+  fixed_code: string | null;
+  file_path: string | null;
+}
+
+export async function runSelfHealingBuild(
+  command: string,
+  args: string[],
+): Promise<HealingResult> {
+  return invoke<HealingResult>('run_self_healing_build', { command, args });
+}
+
+
 
 // ─── Event Listeners ─────────────────────────────────────────────────────────
 
