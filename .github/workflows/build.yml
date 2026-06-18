@@ -2,9 +2,11 @@ name: Build AstraForge
 
 on:
   push:
-    branches: [main, develop]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
+  workflow_dispatch:
+
 
 jobs:
   build-windows:
