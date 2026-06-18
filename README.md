@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AstraForge Logo](public/astraforge.svg)
+![AstraForge Logo](public/logo.png)
 
 ## The Autonomous AI Development Environment
 
@@ -12,6 +12,7 @@
 [![Rust](https://img.shields.io/badge/Rust-2021-orange.svg)](https://www.rust-lang.org)
 
 </div>
+
 
 ---
 
@@ -166,17 +167,22 @@ astraforge/
 └── package.json
 ```
 
-## 🤝 AI Provider Support
+## 🤝 AI Provider & Protocol Support
 
-| Provider | Status | Notes |
-|----------|--------|-------|
+| Tech / Protocol | Status | Notes |
+|-----------------|--------|-------|
 | NVIDIA NIM | ✅ Primary | integrate.api.nvidia.com |
 | Ollama | ✅ Supported | Local models |
 | OpenRouter | ✅ Supported | Model marketplace |
 | LM Studio | ✅ Supported | Local inference |
 | OpenAI-compatible | ✅ Supported | Any compatible API |
+| Model Context Protocol (MCP) | ✅ Native Stdio Client | Fully interactive JSON-RPC server extensions |
+| Hybrid Semantic RAG | ✅ Integrated | Full repository chunking search |
+| Real-time Code Review | ✅ Supported | Bug, logical, and security audit scanning |
+| Compiler Self-Healing | ✅ Supported | Automated build error diagnosis and fixes |
 
 ## 📄 License
+
 
 MIT License — see [LICENSE](LICENSE) for details.
 
