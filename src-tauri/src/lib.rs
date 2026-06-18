@@ -9,6 +9,7 @@ pub mod agent;
 pub mod memory;
 pub mod checkpoint;
 pub mod settings;
+pub mod rag;
 
 use std::path::PathBuf;
 use tauri::{App, Manager};
@@ -107,8 +108,12 @@ pub fn run() {
             // Settings
             crate::settings::commands::get_setting,
             crate::settings::commands::set_setting,
-            crate::settings::commands::get_all_settings
+            crate::settings::commands::get_all_settings,
+
+            // RAG Semantic Search
+            crate::rag::commands::semantic_search
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+

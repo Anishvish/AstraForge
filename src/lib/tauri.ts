@@ -384,6 +384,22 @@ export async function restoreCheckpoint(
   return invoke<void>('restore_checkpoint', { checkpointId, projectPath });
 }
 
+export interface RAGSearchResult {
+  file_path: string;
+  start_line: number;
+  end_line: number;
+  content: string;
+  relevance_score: number;
+}
+
+export async function semanticSearch(
+  query: string,
+  limit?: number,
+): Promise<RAGSearchResult[]> {
+  return invoke<RAGSearchResult[]>('semantic_search', { query, limit: limit ?? 5 });
+}
+
+
 // ─── Event Listeners ─────────────────────────────────────────────────────────
 
 export function onTerminalOutput(
