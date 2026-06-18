@@ -413,6 +413,22 @@ export async function runSelfHealingBuild(
   return invoke<HealingResult>('run_self_healing_build', { command, args });
 }
 
+export interface ReviewFinding {
+  line_number: number;
+  severity: 'info' | 'warning' | 'critical';
+  category: 'security' | 'bug' | 'performance' | 'style';
+  message: string;
+  suggestion: string;
+}
+
+export async function reviewCode(
+  code: string,
+  fileName: string,
+): Promise<ReviewFinding[]> {
+  return invoke<ReviewFinding[]>('review_code', { code, fileName });
+}
+
+
 
 
 // ─── Event Listeners ─────────────────────────────────────────────────────────

@@ -7,8 +7,8 @@ import { TerminalPanel } from "../terminal/TerminalPanel";
 import { GitPanel } from "../git/GitPanel";
 import { ChatPanel } from "../chat/ChatPanel";
 import { ModelPanel } from "../models/ModelPanel";
-import { SettingsPanel } from "../settings/SettingsPanel";
 import { SearchPanel } from "../search/SearchPanel";
+import { ReviewPanel } from "../review/ReviewPanel";
 
 export function PanelContainer() {
   const showSidebar = useUIStore((s) => s.showSidebar);
@@ -23,12 +23,15 @@ export function PanelContainer() {
         return <FileExplorer />;
       case "search":
         return <SearchPanel />;
+      case "review":
+        return <ReviewPanel />;
       case "git":
         return <GitPanel />;
       case "chat":
         return <ChatPanel />;
       case "settings":
         return <SettingsPanel />;
+
 
       default:
         return (
