@@ -428,6 +428,34 @@ export async function reviewCode(
   return invoke<ReviewFinding[]>('review_code', { code, fileName });
 }
 
+export interface McpServerInfo {
+  name: string;
+  command: string;
+  args: string[];
+  status: string;
+}
+
+export async function connectMcpServer(
+  name: string,
+  command: string,
+  args: string[],
+): Promise<void> {
+  return invoke<void>('connect_mcp_server', { name, command, args });
+}
+
+export async function listMcpServers(): Promise<McpServerInfo[]> {
+  return invoke<McpServerInfo[]>('list_mcp_servers');
+}
+
+export async function executeMcpTool(
+  serverName: string,
+  toolName: string,
+  args: Record<string, any>,
+): Promise<any> {
+  return invoke<any>('execute_mcp_tool', { serverName, toolName, args });
+}
+
+
 
 
 

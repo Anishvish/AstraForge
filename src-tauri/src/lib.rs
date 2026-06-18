@@ -12,6 +12,7 @@ pub mod settings;
 pub mod rag;
 pub mod healing;
 pub mod review;
+pub mod mcp;
 
 use std::path::PathBuf;
 use tauri::{App, Manager};
@@ -119,8 +120,14 @@ pub fn run() {
             crate::healing::commands::run_self_healing_build,
 
             // Code Review & Security Audit
-            crate::review::commands::review_code
+            crate::review::commands::review_code,
+
+            // MCP Server support
+            crate::mcp::commands::connect_mcp_server,
+            crate::mcp::commands::list_mcp_servers,
+            crate::mcp::commands::execute_mcp_tool
         ])
+
 
 
         .run(tauri::generate_context!())

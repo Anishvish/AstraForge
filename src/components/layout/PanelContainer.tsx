@@ -9,6 +9,7 @@ import { ChatPanel } from "../chat/ChatPanel";
 import { ModelPanel } from "../models/ModelPanel";
 import { SearchPanel } from "../search/SearchPanel";
 import { ReviewPanel } from "../review/ReviewPanel";
+import { McpPanel } from "../mcp/McpPanel";
 
 export function PanelContainer() {
   const showSidebar = useUIStore((s) => s.showSidebar);
@@ -25,12 +26,15 @@ export function PanelContainer() {
         return <SearchPanel />;
       case "review":
         return <ReviewPanel />;
+      case "mcp":
+        return <McpPanel />;
       case "git":
         return <GitPanel />;
       case "chat":
         return <ChatPanel />;
       case "settings":
         return <SettingsPanel />;
+
 
 
       default:

@@ -8,6 +8,7 @@ import {
   Sun,
   Moon,
   ShieldAlert,
+  Puzzle,
 } from "lucide-react";
 import { useUIStore, type SidebarPanel } from "@/stores/ui";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
@@ -57,7 +58,9 @@ export function Sidebar() {
         <SidebarButton panel="agents" icon={<Bot size={20} />} label="Agents" />
         <SidebarButton panel="chat" icon={<MessageSquare size={20} />} label="AI Chat" />
         <SidebarButton panel="review" icon={<ShieldAlert size={20} />} label="Code Review" />
+        <SidebarButton panel="mcp" icon={<Puzzle size={20} />} label="MCP Plugins" />
       </div>
+
 
 
       <div className="flex flex-col gap-2 items-center w-full">

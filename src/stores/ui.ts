@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { generateId } from '@/lib/utils';
 
-export type SidebarPanel = 'explorer' | 'search' | 'git' | 'agents' | 'settings' | 'chat' | 'review';
+export type SidebarPanel = 'explorer' | 'search' | 'git' | 'agents' | 'settings' | 'chat' | 'review' | 'mcp';
+
 
 export type RightPanelContent = 'chat' | 'agents' | 'models';
 
