@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AstraForge Logo](public/logo.png)
+![AstraForge Logo](public/logo.jpg)
 
 ## The Autonomous AI Development Environment
 
@@ -12,6 +12,7 @@
 [![Rust](https://img.shields.io/badge/Rust-2021-orange.svg)](https://www.rust-lang.org)
 
 </div>
+
 
 
 ---

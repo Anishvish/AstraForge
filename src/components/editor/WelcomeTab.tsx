@@ -10,7 +10,8 @@ export function WelcomeTab() {
   return (
     <div className="h-full flex flex-col items-center justify-center p-6 bg-zinc-950 text-zinc-300 gap-8">
       <div className="flex flex-col items-center gap-2 select-none text-center">
-        <img src="/logo.png" alt="AstraForge Logo" className="w-16 h-16 object-contain mb-2 rounded-xl border border-zinc-800 shadow-xl" />
+        <img src="/logo.jpg" alt="AstraForge Logo" className="w-16 h-16 object-contain mb-2 rounded-xl border border-zinc-800 shadow-xl" />
+
         <div className="text-3xl font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
           ASTRAFORGE
         </div>
