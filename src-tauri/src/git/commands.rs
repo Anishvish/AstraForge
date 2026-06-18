@@ -303,8 +303,8 @@ pub async fn git_checkout(path: String, branch: String) -> AppResult<()> {
 
         match reference {
             Some(gref) => {
-                let refname = gref.name().unwrap_or(&format!("refs/heads/{}", branch));
-                repo.set_head(refname)?;
+                let refname_str = gref.name().map(|n| n.to_string()).unwrap_or_else(|| format!("refs/heads/{}", branch));
+                repo.set_head(&refname_str)?;
             }
             None => {
                 repo.set_head_detached(object.id())?;

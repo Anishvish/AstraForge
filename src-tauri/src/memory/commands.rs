@@ -45,11 +45,11 @@ pub async fn recall_memories(
     let lim = limit.unwrap_or(10);
     
     let mut sql = "SELECT id, category, key, value, importance FROM memories".to_string();
-    let mut params: Vec<serde_json::Value> = Vec::new();
+    let mut params: Vec<String> = Vec::new();
     
     if let Some(cat) = category {
         sql.push_str(" WHERE category = ?");
-        params.push(serde_json::Value::String(cat));
+        params.push(cat);
     }
     
     if let Some(q) = query {
@@ -60,17 +60,23 @@ pub async fn recall_memories(
         }
         sql.push_str("(key LIKE ? OR value LIKE ?)");
         let q_wildcard = format!("%{}%", q);
-        params.push(serde_json::Value::String(q_wildcard.clone()));
-        params.push(serde_json::Value::String(q_wildcard));
+        params.push(q_wildcard.clone());
+        params.push(q_wildcard);
     }
     
     sql.push_str(" ORDER BY importance DESC, updated_at DESC LIMIT ?");
-    params.push(serde_json::Value::Number(serde_json::Number::from(lim)));
     
     let mut stmt = db.prepare(&sql)?;
-    let rusqlite_params = rusqlite::params_from_iter(params.iter());
     
-    let rows = stmt.query_map(rusqlite_params, |row| {
+    // We bind query parameters using dynamic references.
+    let mut params_ref: Vec<&dyn rusqlite::types::ToSql> = Vec::new();
+    for p in &params {
+        params_ref.push(p);
+    }
+    let lim_i64 = lim as i64;
+    params_ref.push(&lim_i64);
+    
+    let rows = stmt.query_map(rusqlite::params_from_iter(params_ref), |row| {
         Ok(Memory {
             id: row.get(0)?,
             category: row.get(1)?,
