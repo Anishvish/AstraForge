@@ -1,5 +1,4 @@
 use std::path::Path;
-use walkdir::WalkDir;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

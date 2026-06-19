@@ -70,10 +70,8 @@ pub async fn get_agent_history(state: State<'_, AppState>, task_id: String) -> A
     })?;
     
     let mut list = Vec::new();
-    for row in rows {
-        if let Ok(act) = row {
-            list.push(act);
-        }
+    for act in rows.flatten() {
+        list.push(act);
     }
     Ok(list)
 }

@@ -103,7 +103,7 @@ impl From<notify::Error> for AppError {
 
 impl From<walkdir::Error> for AppError {
     fn from(e: walkdir::Error) -> Self {
-        AppError::Io(std::io::Error::new(std::io::ErrorKind::Other, e.to_string()))
+        AppError::Io(std::io::Error::other(e.to_string()))
     }
 }
 

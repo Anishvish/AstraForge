@@ -15,7 +15,7 @@ pub mod review;
 pub mod mcp;
 
 use std::path::PathBuf;
-use tauri::{App, Manager};
+use tauri::Manager;
 use tracing::info;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 

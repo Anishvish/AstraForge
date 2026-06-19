@@ -72,10 +72,8 @@ pub async fn get_provider_configs(state: State<'_, AppState>) -> AppResult<Vec<P
     })?;
     
     let mut list = Vec::new();
-    for row in rows {
-        if let Ok(c) = row {
-            list.push(c);
-        }
+    for c in rows.flatten() {
+        list.push(c);
     }
     Ok(list)
 }

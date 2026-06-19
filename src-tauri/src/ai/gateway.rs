@@ -1,10 +1,16 @@
 use std::sync::Arc;
 use crate::error::{AppError, AppResult};
-use super::models::{AiResponse, ChatMessage, ChatOptions, ModelInfo, ProviderConfig};
+use super::models::{AiResponse, ChatMessage, ChatOptions};
 use super::providers::{AiProvider, nvidia::NvidiaProvider, ollama::OllamaProvider, openai_compat::OpenaiCompatProvider};
 
 pub struct AiGateway {
     pub providers: std::collections::HashMap<String, Arc<dyn AiProvider>>,
+}
+
+impl Default for AiGateway {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AiGateway {

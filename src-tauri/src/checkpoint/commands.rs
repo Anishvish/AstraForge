@@ -49,10 +49,8 @@ pub async fn list_checkpoints(
     })?;
     
     let mut list = Vec::new();
-    for row in rows {
-        if let Ok(cp) = row {
-            list.push(cp);
-        }
+    for cp in rows.flatten() {
+        list.push(cp);
     }
     Ok(list)
 }

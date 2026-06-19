@@ -1,7 +1,5 @@
 use std::process::Stdio;
 use tokio::process::{Command, Child};
-use tokio::io::{AsyncBufReadExt, BufReader};
-use serde_json::json;
 use crate::error::{AppError, AppResult};
 
 pub struct McpClient {
@@ -22,7 +20,7 @@ impl McpClient {
     }
 
     pub async fn spawn(&mut self) -> AppResult<()> {
-        let mut child = Command::new(&self.command)
+        let child = Command::new(&self.command)
             .args(&self.args)
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())

@@ -8,6 +8,12 @@ pub struct McpRegistry {
     pub active_servers: Arc<Mutex<HashMap<String, McpClient>>>,
 }
 
+impl Default for McpRegistry {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl McpRegistry {
     pub fn new() -> Self {
         Self {

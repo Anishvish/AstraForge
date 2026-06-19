@@ -171,7 +171,7 @@ pub async fn git_unstage(path: String, files: Vec<String>) -> AppResult<()> {
             Ok(head_ref) => {
                 let target = head_ref.peel_to_commit()?;
                 let tree = target.tree()?;
-                repo.reset_default(Some(tree.as_object()), files.iter().map(|s| Path::new(s)))?;
+                repo.reset_default(Some(tree.as_object()), files.iter().map(Path::new))?;
             }
             Err(_) => {
                 // No commits yet, remove from index

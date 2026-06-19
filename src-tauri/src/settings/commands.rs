@@ -35,10 +35,8 @@ pub async fn get_all_settings(state: State<'_, AppState>) -> AppResult<HashMap<S
     })?;
 
     let mut settings = HashMap::new();
-    for row in rows {
-        if let Ok((k, v)) = row {
-            settings.insert(k, v);
-        }
+    for (k, v) in rows.flatten() {
+        settings.insert(k, v);
     }
     Ok(settings)
 }

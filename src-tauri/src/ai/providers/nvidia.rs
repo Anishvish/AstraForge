@@ -1,8 +1,14 @@
-use crate::error::{AppError, AppResult};
+use crate::error::AppResult;
 use crate::ai::models::{AiResponse, ChatMessage, ChatOptions, ModelInfo};
 use super::AiProvider;
 
 pub struct NvidiaProvider;
+
+impl Default for NvidiaProvider {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl NvidiaProvider {
     pub fn new() -> Self {

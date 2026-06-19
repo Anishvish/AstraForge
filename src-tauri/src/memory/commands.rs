@@ -87,10 +87,8 @@ pub async fn recall_memories(
     })?;
     
     let mut list = Vec::new();
-    for row in rows {
-        if let Ok(mem) = row {
-            list.push(mem);
-        }
+    for mem in rows.flatten() {
+        list.push(mem);
     }
     Ok(list)
 }

@@ -1,8 +1,6 @@
-use std::path::Path;
 use walkdir::WalkDir;
 use serde::{Deserialize, Serialize};
 use crate::error::AppResult;
-use super::indexer::CodeChunk;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct RAGSearchResult {

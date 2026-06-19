@@ -1,5 +1,4 @@
 use crate::error::AppResult;
-use futures::Stream;
 
 use super::models::{AiResponse, ChatMessage, ChatOptions, StreamChunk};
 

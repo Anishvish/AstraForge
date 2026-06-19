@@ -1,8 +1,14 @@
-use crate::error::{AppError, AppResult};
+use crate::error::AppResult;
 use crate::ai::models::{AiResponse, ChatMessage, ChatOptions, ModelInfo};
 use super::AiProvider;
 
 pub struct OpenaiCompatProvider;
+
+impl Default for OpenaiCompatProvider {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl OpenaiCompatProvider {
     pub fn new() -> Self {

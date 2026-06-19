@@ -1,8 +1,14 @@
-use crate::error::{AppError, AppResult};
+use crate::error::AppResult;
 use crate::ai::models::{AiResponse, ChatMessage, ChatOptions, ModelInfo};
 use super::AiProvider;
 
 pub struct OllamaProvider;
+
+impl Default for OllamaProvider {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl OllamaProvider {
     pub fn new() -> Self {

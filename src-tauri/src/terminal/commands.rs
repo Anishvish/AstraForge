@@ -1,6 +1,5 @@
 use std::process::Stdio;
 use tauri::State;
-use tokio::io::AsyncWriteExt;
 use tokio::process::Command;
 use tracing::{error, info};
 
@@ -45,7 +44,7 @@ pub async fn write_to_terminal(
     };
 
     // Parse the data as a command and execute it
-    let parts: Vec<&str> = data.trim().split_whitespace().collect();
+    let parts: Vec<&str> = data.split_whitespace().collect();
     if parts.is_empty() {
         return Ok(());
     }
@@ -64,7 +63,7 @@ pub async fn write_to_terminal(
         "-c"
     };
 
-    let output = Command::new(shell)
+    let _output = Command::new(shell)
         .arg(shell_arg)
         .arg(&data)
         .current_dir(&cwd)

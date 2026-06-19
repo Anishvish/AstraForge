@@ -44,10 +44,8 @@ pub async fn list_mcp_servers(state: State<'_, AppState>) -> AppResult<Vec<McpSe
     })?;
     
     let mut list = Vec::new();
-    for row in rows {
-        if let Ok(c) = row {
-            list.push(c);
-        }
+    for c in rows.flatten() {
+        list.push(c);
     }
     Ok(list)
 }
